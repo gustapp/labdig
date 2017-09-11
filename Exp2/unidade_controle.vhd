@@ -11,7 +11,7 @@ entity unidade_controle is
     recebendo             : out std_logic;
     verificando_paridade  : out std_logic;
     apresentando          : out std_logic;
-    saida_estado          : out std_logic
+    saida_estado          : out std_logic_vector(1 downto 0)
   );
 end unidade_controle;
 

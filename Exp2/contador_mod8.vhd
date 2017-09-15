@@ -6,7 +6,7 @@ entity contador_mod8 is
     port(clock     : in  std_logic;
          zera      : in  std_logic;
          conta     : in  std_logic;
-         contagem  : out std_logic_vector(3 downto 0);
+         contagem  : out std_logic_vector(2 downto 0);
          fim       : out std_logic);
 end contador_mod8;
 
@@ -27,8 +27,6 @@ begin
 
   if IQ = 7 then
 		fim <= '1';
-  elsif IQ = 8 then
-    IQ <= (others => '0');
 	else
 		fim <= '0';
 	end if;

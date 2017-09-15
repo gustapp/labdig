@@ -23,7 +23,7 @@ architecture structure of divisor is
 		    fim			: out std_logic);
 	end component;
 
-	component contador_8 is
+	component contador_mod8 is
 			port(
         clock		: in std_logic;
 			  zera		: in std_logic;
@@ -35,8 +35,8 @@ architecture structure of divisor is
 signal s1, s2 : std_logic;
 begin
 
-	c1 : contador port map (clock, zera, conta, conta4, s1);
-	c2 : contador_8 port map(clock, zera, conta, conta8, s2);
+	c1 : contador_mod4 port map (clock, zera, conta, conta4, s1);
+	c2 : contador_mod8 port map(clock, zera, conta, conta8, s2);
 
 	amostra <= s1 xor s2;
 

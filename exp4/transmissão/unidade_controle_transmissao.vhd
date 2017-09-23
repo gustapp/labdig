@@ -41,7 +41,7 @@ begin
 
 			when transmissao =>
 				if enviar = '0' then
-					estado <= inicial;
+					estado <= ligado;
 				end if;
 
 		end case;
@@ -66,6 +66,7 @@ begin
 				DTR <= '1';
 				RTS <= '1';
 				enable_transmissao <= '1';
+
 		end case;
    end process;
 end unidade_controle_transmissao_arch;

@@ -3,11 +3,12 @@ use ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;
 
 entity contador_mod4 is
-    port(clock     : in  std_logic;
-         zera      : in  std_logic;
-         conta     : in  std_logic;
-         contagem  : out std_logic_vector(1 downto 0);
-         fim       : out std_logic);
+    port(
+     clock      : in  std_logic;
+     reset      : in  std_logic;
+     enable     : in  std_logic;
+     contagem   : out std_logic_vector(1 downto 0);
+     fim        : out std_logic);
 end contador_mod4;
 
 architecture exemplo of contador_mod4 is

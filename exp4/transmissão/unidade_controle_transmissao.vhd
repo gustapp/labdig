@@ -17,7 +17,7 @@ type tipo_estado is (inicial, ligado, transmissao);
 signal estado   : tipo_estado;
    
 begin
-	process (clock, estado, reset)
+	process (clock, estado, reset, liga)
 	begin
    
 	if reset = '1' then

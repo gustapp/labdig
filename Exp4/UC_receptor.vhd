@@ -4,7 +4,7 @@ use IEEE.std_logic_1164.all;
 entity UC_receptor is
   port(
     LIGA, RESET, CLOCK, CTS         : in  std_logic;
-    DTR                             : out std_logic;
+    DTR, enable_recepcao            : out std_logic;
     estado                          : out std_logic_vector(1 downto 0)
   );
 end UC_receptor;
@@ -36,12 +36,13 @@ begin
       when INICIAL =>
         estado <= "00";
         DTR <= '0';
+        enable_recepcao <= '0';
       when LIGADO =>
         estado <= "01";
         DTR <= '1';
       when RECEBENDO =>
         estado <= "10";
-        DTR <= '1';
+        enable_recepcao = '1';
     end case;
   end process;
 end estados;

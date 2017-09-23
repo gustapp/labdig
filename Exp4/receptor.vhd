@@ -15,7 +15,7 @@ architecture hierarquica of InterfaceModem is
     port(
       CLOCK, RESET, LIGA , CD         : in  std_logic;
       DTR, enable_recepcao            : out std_logic;
-      estado                          : out std_logic_vector(1 downto 0)
+      dep_estado                      : out std_logic_vector(1 downto 0)
     );
   end component;
 

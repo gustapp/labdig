@@ -6,17 +6,22 @@ entity unidade_controle_transmissao is
 		  enviar			 	 	: in  std_logic;
 		  reset		    	 	: in  std_logic;
 		  clock		    	 	: in  std_logic;
+		  CTS						: in	std_logic;
 		  DTR			       	: out std_logic;
 		  RTS		       	 	: out std_logic;
 		  enable_transmissao : out std_logic;
+		  envioOk				: out std_logic;
 		  s_estado				: out std_logic_vector(1 downto 0));	-- depuracao
 end unidade_controle_transmissao;
 
 architecture unidade_controle_transmissao_arch of unidade_controle_transmissao is
-type tipo_estado is (inicial, ligado, transmissao);
+type tipo_estado is (inicial, ligado, transmissao, espera);
 signal estado   : tipo_estado;
    
 begin
+	
+	envioOk <= CTS;
+	
 	process (clock, estado, reset, liga, enviar)
 	begin
    
@@ -33,10 +38,19 @@ begin
 			when ligado =>
 				if liga = '1' then
 					if enviar = '1' then
-						estado <= transmissao;
+						estado <= espera;
 					end if;
 					else
 						estado <= inicial;
+				end if;
+				
+			when espera =>
+				if enviar = '1' then
+					if CTS = '1' then
+						estado <= transmissao;
+					end if;
+					else 
+						estado <= ligado;
 				end if;
 
 			when transmissao =>
@@ -61,8 +75,13 @@ begin
 				DTR <= '1';
 				RTS <= '0';
 				enable_transmissao <= '0';
-			when transmissao =>
+			when espera =>
 				s_estado <= "10";
+				DTR <= '1';
+				RTS <= '1';
+				enable_transmissao <= '0';
+			when transmissao =>
+				s_estado <= "11";
 				DTR <= '1';
 				RTS <= '1';
 				enable_transmissao <= '1';

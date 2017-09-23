@@ -10,6 +10,12 @@ end InterfaceModem;
 
 architecture hierarquica of InterfaceModem is
 
+
+
+
+
 begin
+
+  UC:
 
 end hierarquica;

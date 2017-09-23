@@ -1,15 +1,15 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity InterfaceModem is
+entity receptor is
   port (
     CLOCK, RESET, LIGA, CD, RD               :   in  std_logic;
     DTR, temDadoRecebido, DadoRecebido       :   out std_logic;
     dep_estado                               :   out std_logic_vector(1 downto 0)
   );
-end InterfaceModem;
+end receptor;
 
-architecture hierarquica of InterfaceModem is
+architecture hierarquica of receptor is
 
   component UC_receptor is
     port(

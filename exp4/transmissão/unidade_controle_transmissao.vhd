@@ -53,12 +53,18 @@ begin
 		case estado is
 			when inicial =>
 				s_estado <= "00";
-				DTR <= '1';
+				DTR <= '0';
+				RTS <= '0';
+				enable_transmissao <= '0';
 			when ligado =>
 				s_estado <= "01";
-				RTS <= '1';
+				DTR <= '1';
+				RTS <= '0';
+				enable_transmissao <= '0';
 			when transmissao =>
 				s_estado <= "10";
+				DTR <= '1';
+				RTS <= '1';
 				enable_transmissao <= '1';
 		end case;
    end process;

@@ -3,7 +3,7 @@ use IEEE.std_logic_1164.all;
 
 entity UC_receptor is
   port(
-    LIGA, RESET, CLOCK, CTS         : in  std_logic;
+    CLOCK, RESET, LIGA, CD          : in  std_logic;
     DTR, enable_recepcao            : out std_logic;
     estado                          : out std_logic_vector(1 downto 0)
   );
@@ -24,7 +24,7 @@ begin
           estado <= LIGADO;
         end if;
       when LIGADO =>
-        if LIGA = '1' and CTS = '1' then
+        if LIGA = '1' and CD = '1' then
           estado <= RECEBENDO;
         end if;
     end case;

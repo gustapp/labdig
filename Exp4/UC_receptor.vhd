@@ -48,8 +48,10 @@ begin
       when LIGADO =>
         dep_estado <= "01";
         DTR <= '1';
+        enable_recepcao <='0';
       when RECEBENDO =>
         dep_estado <= "10";
+        DTR <= '1';
         enable_recepcao <= '1';
     end case;
   end process;

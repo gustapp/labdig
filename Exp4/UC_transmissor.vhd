@@ -69,6 +69,11 @@ begin
 				DTR <= '1';
 				RTS <= '0';
 				enable_transmissao <= '0';
+      when espera =>
+        s_estado <= "10";
+        DTR <= '1';
+        RTS <= '1';
+        enable_transmissao <= '0';
 			when transmissao =>
 				s_estado <= "10";
 				DTR <= '1';

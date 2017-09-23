@@ -5,7 +5,7 @@ entity UC_receptor is
   port(
     CLOCK, RESET, LIGA, CD          : in  std_logic;
     DTR, enable_recepcao            : out std_logic;
-    dep_estado                          : out std_logic_vector(1 downto 0)
+    dep_estado                      : out std_logic_vector(1 downto 0)
   );
 end UC_receptor;
 

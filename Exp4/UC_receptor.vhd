@@ -26,6 +26,12 @@ begin
       when LIGADO =>
         if LIGA = '1' and CD = '1' then
           estado <= RECEBENDO;
+        elsif LIGA = '0' then
+          estado <= INICIAL;
+        end if;
+      when RECEBENDO =>
+        if LIGA = '0' then
+          estado <= INICIAL;
         end if;
     end case;
   end if;

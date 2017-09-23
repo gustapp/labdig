@@ -5,12 +5,12 @@ entity UC_receptor is
   port(
     CLOCK, RESET, LIGA, CD          : in  std_logic;
     DTR, enable_recepcao            : out std_logic;
-    estado                          : out std_logic_vector(1 downto 0)
+    dep_estado                          : out std_logic_vector(1 downto 0)
   );
 end UC_receptor;
 
 architecture estados of UC_receptor is
-type tipo_estado is (INICIAL, LIGADO, RECEBENDO)
+type tipo_estado is (INICIAL, LIGADO, RECEBENDO);
 signal estado : tipo_estado;
 begin
   process (LIGA, RESET, CLOCK, estado)
@@ -32,6 +32,8 @@ begin
       when RECEBENDO =>
         if LIGA = '0' then
           estado <= INICIAL;
+        elsif CD = '0' then
+          estado <= LIGADO;
         end if;
     end case;
   end if;
@@ -40,15 +42,15 @@ begin
   begin
     case estado is
       when INICIAL =>
-        estado <= "00";
+        dep_estado <= "00";
         DTR <= '0';
         enable_recepcao <= '0';
       when LIGADO =>
-        estado <= "01";
+        dep_estado <= "01";
         DTR <= '1';
       when RECEBENDO =>
-        estado <= "10";
-        enable_recepcao = '1';
+        dep_estado <= "10";
+        enable_recepcao <= '1';
     end case;
   end process;
 end estados;

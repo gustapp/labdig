@@ -39,8 +39,8 @@ signal s_enable_transmissao : std_logic;
 
 begin
 
-	k1 : unidade_controle_transmissao port map (liga, enviar, reset, clock, CTS, DTR, RTS, s_enable_transmissao, d_estado);
-	k2 : fluxo_de_dados_transmissao   port map (dado_serial, s_enable_transmissao, TD);
+	k1 : UC_transmissor port map (liga, enviar, reset, clock, CTS, DTR, RTS, s_enable_transmissao, d_estado);
+	k2 : FD_transmissor   port map (dado_serial, s_enable_transmissao, TD);
 
 	envioOk <= s_enable_transmissao;
 

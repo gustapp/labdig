@@ -2,17 +2,16 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;
 
-entity contador_mod8 is
-    port(
-      clock     : in  std_logic;
-      reset     : in  std_logic;
-      enable    : in  std_logic;
-      contagem  : out std_logic_vector(2 downto 0);
-      fim       : out std_logic);
-end contador_mod8;
+entity contador_mod4 is
+    port(clock     : in  std_logic;
+         zera      : in  std_logic;
+         conta     : in  std_logic;
+         contagem  : out std_logic_vector(1 downto 0);
+         fim       : out std_logic);
+end contador_mod4;
 
-architecture exemplo of contador_mod8 is
-signal IQ: unsigned(2 downto 0);
+architecture exemplo of contador_mod4 is
+signal IQ: unsigned(1 downto 0);
 
 begin
 	process (clock, conta, IQ, zera)
@@ -26,7 +25,7 @@ begin
 		end if;
 	end if;
 
-  if IQ = 7 then
+  if IQ = 3 then
 		fim <= '1';
 	else
 		fim <= '0';

@@ -5,7 +5,7 @@ entity unidade_controle is
   port(
     clock                 : in  std_logic;
     reset                 : in  std_logic;
-    entrada_serial        : in  std_logic;
+    e_s_amostrada         : in  std_logic;
     finaliza_recepcao     : in  std_logic;
     finaliza_paridade     : in  std_logic;
     recebendo             : out std_logic;
@@ -28,7 +28,7 @@ begin
   elsif clock'event and clock = '1' then
     case estado is
       when INICIAL =>
-        if entrada_serial = '0' then
+        if e_s_amostrada = '0' then
           estado <= RECEBE;
         else
           estado <= INICIAL;

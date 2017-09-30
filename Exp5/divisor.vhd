@@ -15,7 +15,7 @@ architecture structure of divisor is
 
 	component contador_mod4 is
 		port(
-         clock		: in std_logic;
+      clock		: in std_logic;
 			zera		: in std_logic;
 			conta 		: in std_logic;
 		   contagem	: out std_logic_vector(1 downto 0);

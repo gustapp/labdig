@@ -19,6 +19,7 @@ architecture hierarquica of Recepcao is
 		port(
 		  clock							: in  std_logic;
 	    reset							: in  std_logic;
+      tick              : in  std_logic;
 		  e_s							: in  std_logic;
 	    amostrando					: in  std_logic;
 		  recebendo 					: in  std_logic;
@@ -36,16 +37,17 @@ architecture hierarquica of Recepcao is
 
 	component R_UC is
 		port(
-		 clock                 : in  std_logic;
-		 reset                 : in  std_logic;
-		 e_s						  : in  std_logic;
-		 amostra			        : in  std_logic;
-		 finaliza_recepcao     : in  std_logic;
-		 amostrando				  : out std_logic;
-		 recebendo             : out std_logic;
-		 verificando_paridade  : out std_logic;
-		 apresentando          : out std_logic;
-		 saida_estado          : out std_logic_vector(2 downto 0)
+    	 clock                 : in  std_logic;
+    	 reset                 : in  std_logic;
+    	 e_s						       : in  std_logic;
+    	 amostra			         : in  std_logic;
+    	 finaliza_recepcao     : in  std_logic;
+       tick                  : in  std_logic;
+    	 amostrando				     : out std_logic;
+    	 recebendo             : out std_logic;
+    	 verificando_paridade  : out std_logic;
+    	 apresentando          : out std_logic;
+    	 saida_estado          : out std_logic_vector(2 downto 0)
 	);
 	end component;
 
@@ -55,7 +57,7 @@ signal s_finaliza_recepcao : std_logic;
 
 begin
 
-	FD: fluxo_dados port map(clock, reset, e_s, s_amostrando, s_recebendo, s_verificando_paridade, s_apresentando, s_amostra, s_finaliza_recepcao, paridadeOK, saida, display1, display2, dep_mod9);
-	UC: unidade_controle port map(clock, reset, e_s, s_amostra, s_finaliza_recepcao, s_amostrando, s_recebendo, s_verificando_paridade, s_apresentando, UC_estado);
+	FD: R_FD port map(clock, reset, tick_rx, e_s, s_amostrando, s_recebendo, s_verificando_paridade, s_apresentando, s_amostra, s_finaliza_recepcao, paridadeOK, saida, display1, display2, dep_mod9);
+	UC: R_UC port map(clock, reset, e_s, s_amostra, s_finaliza_recepcao, tick_rx, s_amostrando, s_recebendo, s_verificando_paridade, s_apresentando, UC_estado);
 
 end hierarquica;

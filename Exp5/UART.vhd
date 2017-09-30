@@ -75,11 +75,11 @@ signal s_dado, s_pronto_trans, s_prontoRecep, s_paridade_ok			: std_logic;
 begin
 
 
-	z:	GeradorTick					port map(clock, reset, s_rx);
+	z:	GeradorTick					generic map(M=>1200)  port map(clock, reset, s_rx);
 	r:	Recepcao						port map(clock, reset, s_rx, dado_serial, s_dado, s_prontoRecep, s_paridade_ok);
-	x: GeradorTick					port map(clock, reset, s_tx);
+	x:  GeradorTick					generic map(M=>19200) port map(clock, reset, s_tx);
 	t:	Transmissao 				port map(clock, reset, s_tx, s_partida, s_dados_ascii, s_pronto_trans);
-	i: interface 					port map(clock, reset, s_dado, s_prontoRecep, s_paridade_ok, s_pronto_trans, recebe_dado, transmite_dado, dado_trans, dado_rec, transm_andamento, tem_dado_rec, s_partida, s_dados_ascii);
+	i:  Interface 					port map(clock, reset, s_dado, s_prontoRecep, s_paridade_ok, s_pronto_trans, recebe_dado, transmite_dado, dado_trans, dado_rec, transm_andamento, tem_dado_rec, s_partida, s_dados_ascii);
 
 
 

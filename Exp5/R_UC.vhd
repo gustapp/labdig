@@ -5,10 +5,11 @@ entity R_UC is
 	port(
 	 clock                 : in  std_logic;
 	 reset                 : in  std_logic;
-	 e_s						  : in  std_logic;
-	 amostra			        : in  std_logic;
+	 e_s						       : in  std_logic;
+	 amostra			         : in  std_logic;
 	 finaliza_recepcao     : in  std_logic;
-	 amostrando				  : out std_logic;
+   tick                  : in  std_logic;
+	 amostrando				     : out std_logic;
 	 recebendo             : out std_logic;
 	 verificando_paridade  : out std_logic;
 	 apresentando          : out std_logic;
@@ -29,21 +30,21 @@ begin
   elsif clock'event and clock = '1' then
     case estado is
       when INICIAL =>
-        if e_s = '0' then
+        if e_s = '0' and tick = '1' then
           estado <= VERIFICA_AMOSTRA;
         else
           estado <= INICIAL;
         end if;
 		when VERIFICA_AMOSTRA =>
-			if e_s = '0' and amostra = '1' then
+			if e_s = '0' and amostra = '1' and tick = '1' then
 				estado <= RECEBE;
-			elsif e_s = '1' and amostra = '1' then
+			elsif e_s = '1' and amostra = '1' and tick = '1' then
 				estado <= INICIAL;
 			else
 				estado <= VERIFICA_AMOSTRA;
 			end if;
       when RECEBE =>
-        if finaliza_recepcao = '1' then
+        if finaliza_recepcao = '1' and tick = '1' then
           estado <= VERIFICA_PARIDADE;
         else
           estado <= RECEBE;
